@@ -23,7 +23,7 @@ Every skill and agent under `skills/` and `agents/` was copied unchanged from th
 | [alpha-omega-security/threat-model](https://github.com/alpha-omega-security/threat-model) | `192fd60` | MIT | threat-model, threat-model-authoring, threat-model-backtest, threat-model-interview, threat-model-recon, threat-model-sidecar, threat-model-surface, threat-model-triage |
 | [raroque/vibe-security-skill](https://github.com/raroque/vibe-security-skill) | `850938f` | MIT | vibe-security |
 | [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | `e435a22` | MIT | bmad, bmad-advanced-elicitation, bmad-agent-analyst, bmad-agent-architect, bmad-agent-dev, bmad-agent-pm, bmad-agent-po, bmad-agent-ux-designer, bmad-architecture, bmad-brainstorming, bmad-build, bmad-build-auto, bmad-code-review, bmad-customize, bmad-deep-recon, bmad-facilitate, bmad-forge-idea, bmad-ingest, bmad-party-mode, bmad-project-context, bmad-qa-generate-e2e-tests, bmad-retrospective, bmad-review, bmad-shard-pro, bmad-ux, bmad-walkthrough, bmod-core-tools, bmod-method |
-| [NabilRFG12/Reverse-Engineer-anything](https://github.com/NabilRFG12/Reverse-Engineer-anything) | `e762e32` | MIT | reverse-engineer-anything |
+| [morluto/rea](https://github.com/morluto/rea) | `192177f` | MIT | reverse-engineer-anything |
 
 ## Notes
 
