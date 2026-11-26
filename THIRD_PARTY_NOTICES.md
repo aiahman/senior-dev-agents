@@ -1,6 +1,6 @@
 # Third-party notices
 
-Every skill and agent under `.claude/` was copied unchanged from the repositories below (except where noted). Each source keeps its own license; full license texts are in [`licenses/`](licenses/). Copyright stays with the original authors.
+Every skill and agent under `skills/` and `agents/` was copied unchanged from the repositories below (except where noted). Each source keeps its own license; full license texts are in [`licenses/`](licenses/). Copyright stays with the original authors.
 
 | Source | Commit | License | Skills and agents copied |
 |---|---|---|---|

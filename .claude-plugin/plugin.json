@@ -1,0 +1,8 @@
+{
+  "name": "senior-dev-agents",
+  "version": "1.0.0",
+  "description": "An AI dev team organized like an IT company: 106 skills and 10 agents for scoping, design, front end, back end, mobile, QA, cybersecurity and DevOps.",
+  "author": { "name": "Aiah" },
+  "license": "SEE LICENSE IN THIRD_PARTY_NOTICES.md",
+  "keywords": ["dev-team", "skills", "agents", "security", "cloudflare", "nextjs"]
+}

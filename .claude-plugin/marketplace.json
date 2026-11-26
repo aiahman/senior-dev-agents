@@ -1,0 +1,13 @@
+{
+  "name": "senior-dev-agents",
+  "owner": { "name": "Aiah" },
+  "metadata": { "description": "Aiah's private marketplace for the Senior Dev Agents team." },
+  "plugins": [
+    {
+      "name": "senior-dev-agents",
+      "source": "./",
+      "description": "An AI dev team organized like an IT company: 106 skills and 10 agents.",
+      "version": "1.0.0"
+    }
+  ]
+}
