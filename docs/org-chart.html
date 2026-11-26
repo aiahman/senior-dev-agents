@@ -1,0 +1,302 @@
+<title>Senior Dev Agents Org Chart</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout: sticky header with department tabs; a top-down org tree (IT > department > lead > stacked specialists); click any box for a skills drawer. */
+:root {
+  --bg: #f4f6fa;
+  --surface: #ffffff;
+  --fg: #16202e;
+  --muted: #5a6678;
+  --line: #b9c3d3;
+  --dept: #2f5fd0;
+  --dept-fg: #ffffff;
+  --lead: #8fb0f2;
+  --lead-fg: #0f1d38;
+  --staff: #dce7fc;
+  --staff-fg: #16202e;
+  --ring: #1f4fc2;
+  --chip: #e8edf5;
+  --ok: #1f7a4d; --ok-bg: #dcf3e6;
+  --warn: #8a5a00; --warn-bg: #fdf0d2;
+  --new: #6b3fb8; --new-bg: #ece3fb;
+  --shadow: 0 1px 2px rgba(22,32,46,.08), 0 2px 8px rgba(22,32,46,.06);
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f141c; --surface: #161d28; --fg: #e6ebf3; --muted: #97a3b6; --line: #3a4659;
+  --dept: #3f6fe0; --dept-fg: #ffffff; --lead: #2c4a86; --lead-fg: #eef3ff; --staff: #1d2b45; --staff-fg: #dbe5f7;
+  --ring: #8fb0f2; --chip: #222c3b;
+  --ok: #7fd8a6; --ok-bg: #173527; --warn: #f2c46b; --warn-bg: #3a2e14; --new: #c7a8ff; --new-bg: #2c2147;
+  --shadow: 0 1px 2px rgba(0,0,0,.4); color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f141c; --surface: #161d28; --fg: #e6ebf3; --muted: #97a3b6; --line: #3a4659;
+  --dept: #3f6fe0; --dept-fg: #ffffff; --lead: #2c4a86; --lead-fg: #eef3ff; --staff: #1d2b45; --staff-fg: #dbe5f7;
+  --ring: #8fb0f2; --chip: #222c3b;
+  --ok: #7fd8a6; --ok-bg: #173527; --warn: #f2c46b; --warn-bg: #3a2e14; --new: #c7a8ff; --new-bg: #2c2147;
+  --shadow: 0 1px 2px rgba(0,0,0,.4); color-scheme: dark }
+
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 14px; line-height: 1.45 }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface) }
+.wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line) }
+.head-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; padding-block: 14px 8px }
+h1 { font-family: var(--display); font-size: 1.35rem; margin: 0; letter-spacing: -.01em; text-wrap: balance }
+.counts { color: var(--muted); font-size: .85rem; font-variant-numeric: tabular-nums }
+.tabs { display: flex; gap: 6px; overflow-x: auto; padding-block: 4px 12px; scrollbar-width: thin }
+.tab { flex: none; font: 500 .82rem var(--body); border: 1px solid var(--line); background: var(--surface); color: var(--fg); padding: 6px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap }
+.tab:hover { border-color: var(--ring) }
+.tab[aria-selected="true"] { background: var(--dept); border-color: var(--dept); color: var(--dept-fg) }
+.tab:focus-visible, .node:focus-visible, .zbtn:focus-visible, .close:focus-visible, .agent:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px }
+
+main { padding-block: 18px 48px }
+.intro { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; justify-content: space-between; margin-bottom: 14px }
+.intro p { margin: 0; color: var(--muted); max-width: 70ch }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: .78rem; color: var(--muted); align-items: center }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -2px; margin-right: 5px; border: 1px solid var(--line) }
+.zoom { display: flex; gap: 6px; align-items: center }
+.zbtn { font: 500 .78rem var(--body); border: 1px solid var(--line); background: var(--surface); color: var(--fg); padding: 5px 10px; border-radius: 6px; cursor: pointer }
+.zbtn[aria-pressed="true"] { border-color: var(--ring); color: var(--ring) }
+
+.canvas { overflow: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px 16px 32px }
+.tree { width: max-content; margin: 0 auto }
+
+/* CSS tree connectors */
+.tree ul { display: flex; justify-content: center; padding: 28px 0 0; margin: 0; list-style: none; position: relative }
+.tree > ul { padding-top: 0 }
+.tree li { position: relative; padding: 28px 10px 0; display: flex; flex-direction: column; align-items: center }
+.tree li::before, .tree li::after { content: ""; position: absolute; top: 0; right: 50%; width: 50%; height: 28px; border-top: 2px solid var(--line) }
+.tree li::after { right: auto; left: 50%; border-left: 2px solid var(--line) }
+.tree li:only-child::before, .tree li:only-child::after { display: none }
+.tree li:only-child { padding-top: 0 }
+.tree li:first-child::before, .tree li:last-child::after { border: 0 none }
+.tree li:last-child::before { border-right: 2px solid var(--line); border-radius: 0 8px 0 0 }
+.tree li:first-child::after { border-radius: 8px 0 0 0 }
+.tree ul ul::before { content: ""; position: absolute; top: 0; left: 50%; height: 28px; border-left: 2px solid var(--line) }
+.tree > ul > li::before, .tree > ul > li::after { display: none }
+
+.node { width: 176px; min-height: 132px; padding: 12px 10px; border-radius: 6px; border: 1px solid rgba(0,0,0,.12); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; cursor: pointer; font: inherit; color: inherit; position: relative }
+.node:hover { outline: 2px solid var(--ring); outline-offset: 1px }
+.node .nm { font-weight: 600; font-size: .88rem; line-height: 1.2 }
+.node .rl { font-size: .8rem; line-height: 1.25 }
+.n-root { background: var(--surface); border: 2px solid var(--line); width: 200px }
+.n-root .nm { font-family: var(--display); font-size: 1rem; letter-spacing: .04em; text-transform: uppercase }
+.n-dept { background: var(--dept); color: var(--dept-fg) }
+.n-dept .nm { font-family: var(--display); font-size: .92rem; letter-spacing: .02em }
+.n-dept .rl { opacity: .85 }
+.n-lead { background: var(--lead); color: var(--lead-fg) }
+.n-staff { background: var(--staff); color: var(--staff-fg); min-height: 0; padding: 10px; flex-direction: row; justify-content: flex-start; text-align: left; width: 100% }
+.n-staff .txt { display: flex; flex-direction: column; gap: 2px; min-width: 0 }
+.n-staff .rl { font-weight: 600; font-size: .8rem }
+.n-staff .sk { font-size: .72rem; opacity: .75 }
+
+.photo { width: 52px; height: 52px; border-radius: 50%; flex: none; display: grid; place-items: center; font: 600 .95rem var(--display); background: var(--surface); color: var(--muted); border: 2px dashed var(--line) }
+.n-dept .photo { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.55); color: var(--dept-fg) }
+.n-lead .photo { border-color: var(--lead-fg); color: var(--lead-fg); background: rgba(255,255,255,.35) }
+.n-staff .photo { width: 34px; height: 34px; font-size: .7rem; background: var(--surface) }
+.photo svg { width: 55%; height: 55%; fill: none; stroke: currentColor; stroke-width: 1.6 }
+
+/* lead + stacked specialists */
+.unit { width: 196px; display: flex; flex-direction: column }
+.unit .n-lead { width: 196px }
+.tree ul.staff { list-style: none; margin: 0; padding: 0 0 0 24px; justify-content: flex-start; display: flex; flex-direction: column; gap: 12px; margin-top: 20px; position: relative }
+.tree ul.staff::before { display: none }
+.tree .staff li { padding: 0; display: block; position: relative }
+.tree .staff li::before { content: ""; position: absolute; display: block; left: -12px; top: 50%; width: 12px; height: 0; border: 0; border-top: 2px solid var(--line); border-radius: 0 }
+.tree .staff li::after { content: ""; position: absolute; display: block; left: -12px; top: -12px; width: 0; height: calc(100% + 12px); border: 0; border-left: 2px solid var(--line); border-radius: 0 }
+.tree .staff li:first-child::after { top: -20px; height: calc(100% + 20px) }
+.tree .staff li:last-child::after { height: calc(50% + 12px) }
+.tree .staff li:first-child:last-child::after { height: calc(50% + 20px) }
+
+/* department directory */
+.dir { margin-top: 26px; display: grid; gap: 14px }
+.dir h2 { font-family: var(--display); font-size: 1.1rem; margin: 0 }
+.dir .sub { color: var(--muted); margin: 0 }
+.team { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden }
+.team-head { padding: 12px 16px; background: var(--lead); color: var(--lead-fg); display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline }
+.team-head b { font-family: var(--display) }
+.agents { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; background: var(--surface) }
+.agent { background: var(--surface); box-shadow: 0 0 0 1px var(--line); padding: 12px 16px; display: grid; gap: 6px; align-content: start; min-width: 0; border: 0; text-align: left; font: inherit; color: inherit; cursor: pointer }
+.agent:hover { background: var(--chip) }
+.agent .rl { font-weight: 600 }
+.chips { display: flex; flex-wrap: wrap; gap: 4px }
+.chip { font: 500 .72rem var(--body); padding: 2px 7px; border-radius: 4px; background: var(--chip); color: var(--fg); overflow-wrap: anywhere }
+.chip.c-Candidate { background: var(--new-bg); color: var(--new) }
+
+/* drawer */
+.scrim { position: fixed; inset: 0; background: rgba(10,15,25,.35); z-index: 20 }
+.drawer { position: fixed; z-index: 21; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: var(--surface); border-left: 1px solid var(--line); box-shadow: -8px 0 24px rgba(0,0,0,.15); display: flex; flex-direction: column; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px) }
+.d-head { padding: 18px 20px 14px; border-bottom: 1px solid var(--line); display: flex; gap: 14px; align-items: center }
+.d-head .photo { width: 56px; height: 56px }
+.d-head h3 { margin: 0; font-family: var(--display); font-size: 1.1rem }
+.d-head p { margin: 2px 0 0; color: var(--muted); font-size: .85rem }
+.close { margin-left: auto; align-self: flex-start; border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 6px; padding: 4px 10px; cursor: pointer; font: inherit }
+.d-body { padding: 16px 20px 24px; overflow-y: auto; display: grid; gap: 14px; align-content: start }
+.d-label { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 }
+.skill { display: grid; gap: 3px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px }
+.skill .top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline }
+.skill code { font: 600 .82rem ui-monospace, "SFMono-Regular", Menlo, monospace; overflow-wrap: anywhere }
+.skill p { margin: 0; color: var(--muted); font-size: .84rem }
+.st { font: 600 .68rem var(--body); padding: 2px 7px; border-radius: 999px; white-space: nowrap }
+.st-Approved { background: var(--ok-bg); color: var(--ok) }
+.st-Shortlisted { background: var(--warn-bg); color: var(--warn) }
+.st-Candidate { background: var(--new-bg); color: var(--new) }
+.note { font-size: .8rem; color: var(--muted); margin: 0 }
+
+@media (prefers-reduced-motion: no-preference) { .drawer { animation: slide .18s ease-out } @keyframes slide { from { transform: translateX(24px); opacity: .6 } } }
+@media (max-width: 520px) { .canvas { padding: 16px 8px } }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="head-row">
+      <h1>Senior Dev Agents</h1>
+      <span class="counts" id="counts"></span>
+    </div>
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Departments"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <p id="introText"></p>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--dept)"></i>Department</span>
+      <span><i class="sw" style="background:var(--lead)"></i>Lead</span>
+      <span><i class="sw" style="background:var(--staff)"></i>Specialist agent</span>
+      <span class="zoom" id="zoom">
+        <button class="zbtn" id="zFit" type="button">Fit to screen</button>
+        <button class="zbtn" id="z100" type="button">100%</button>
+      </span>
+    </div>
+  </div>
+  <div class="canvas" id="canvas"><div class="tree" id="tree"></div></div>
+  <section class="dir" id="dir" hidden></section>
+</main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-labelledby="dTitle" role="dialog">
+  <div class="d-head">
+    <div class="photo" id="dPhoto"></div>
+    <div><h3 id="dTitle"></h3><p id="dSub"></p></div>
+    <button class="close" id="dClose" type="button">Close</button>
+  </div>
+  <div class="d-body" id="dBody"></div>
+</aside>
+
+<script>
+const DATA = [{"id":"product","name":"Product & Business Analysis","does":"Understands the problem and scopes the tool before anything is built.","leads":[{"n":"Andrea Dela Cruz","t":"Product Lead","skills":[{"n":"bmad-agent-pm","d":"Product manager who writes and reviews the product requirements document (PRD).","s":"Approved"},{"n":"bmad-facilitate","d":"Coaches you through writing or checking a planning document.","s":"Approved"},{"n":"bmad-party-mode","d":"Lets several team personas discuss one question together, like a meeting.","s":"Approved"}],"staff":[{"t":"Project Coordinator","skills":[{"n":"bmad","d":"Front door of BMAD: tells you which skill to use next and sets the method up.","s":"Approved"}]},{"t":"Product Owner","skills":[{"n":"bmad-agent-po","d":"Product owner who turns ideas into epics, user stories and acceptance criteria.","s":"Approved"},{"n":"writing-plans","d":"Turns a spec into a step-by-step build plan before code is touched.","s":"Candidate"}]},{"t":"Acceptance Reviewer","skills":[{"n":"spec-to-code-compliance","d":"Checks code against its spec: which requirements hold, which are broken, which are missing.","s":"Candidate"}]}]},{"n":"Paolo Reyes","t":"Business Analysis Lead","skills":[{"n":"bmad-agent-analyst","d":"Business analyst who researches the market and competitors and pins down requirements.","s":"Approved"}],"staff":[{"t":"Business Analyst","skills":[{"n":"bmad-advanced-elicitation","d":"Critiques a first draft and proposes one stronger revision.","s":"Approved"},{"n":"bmad-ingest","d":"Turns a transcript, voice memo or long document into cited notes the agents can use.","s":"Approved"}]},{"t":"Brainstorming Facilitator","skills":[{"n":"bmad-brainstorming","d":"Runs a brainstorming session with different creative techniques.","s":"Approved"},{"n":"bmad-forge-idea","d":"Has several personas poke holes in a half-formed idea until you can act on it or drop it.","s":"Approved"},{"n":"brainstorming","d":"Forces a design conversation before any new feature is built.","s":"Candidate"}]}]}]},{"id":"research","name":"Research & Discovery","does":"Studies existing code and other apps so the team knows what it's dealing with.","leads":[{"n":"Bea Villanueva","t":"Research Lead","skills":[{"n":"bmad-deep-recon","d":"Decision-grade research on a topic or repo, with sources.","s":"Approved"}],"staff":[{"t":"Codebase Analyst","skills":[{"n":"understand","d":"Builds a knowledge graph of a codebase so agents understand how it fits together.","s":"Approved"},{"n":"understand-chat","d":"Answers questions about the codebase using that graph.","s":"Approved"},{"n":"understand-explain","d":"Gives a deep-dive explanation of one file, function or module.","s":"Approved"},{"n":"understand-diff","d":"Explains what a change or PR touches and how risky it is.","s":"Approved"}]},{"t":"Domain Analyst","skills":[{"n":"understand-domain","d":"Maps the business flows (domains, steps) hidden in the code.","s":"Approved"},{"n":"understand-onboard","d":"Writes an onboarding guide for someone new to the project.","s":"Approved"},{"n":"understand-dashboard","d":"Opens the knowledge graph as an interactive map in your browser.","s":"Approved"}]},{"t":"Knowledge Manager","skills":[{"n":"understand-knowledge","d":"Turns a notes or wiki folder into a searchable knowledge graph.","s":"Approved"}]},{"t":"Reverse Engineer","skills":[{"n":"reverse-engineer-anything","d":"Looks inside an app you don't have the code for and explains how a feature works, with evidence.","s":"Approved"}]}]}]},{"id":"architecture","name":"Solution Architecture","does":"Decides how the system fits together and where the risks are.","leads":[{"n":"Miguel Bautista","t":"Chief Architect","skills":[{"n":"bmad-agent-architect","d":"System architect who leads technical design.","s":"Approved"},{"n":"bmad-architecture","d":"Records the key architecture decisions in one short document.","s":"Approved"}],"staff":[{"t":"API & Interface Designer","skills":[{"n":"api-and-interface-design","d":"Designs stable APIs and module boundaries (REST, GraphQL, types).","s":"Shortlisted"}]},{"t":"Codebase Architect","skills":[{"n":"codebase-design","d":"Gives a shared vocabulary for designing simple, deep modules.","s":"Shortlisted"},{"n":"improve-codebase-architecture","d":"Scans the codebase for refactors worth doing and reports them.","s":"Shortlisted"}]},{"t":"Cloud Architect","skills":[{"n":"cloudflare","d":"Helps pick the right Cloudflare product for an app, API, storage or security need.","s":"Candidate"}]},{"t":"Payments Architect","skills":[{"n":"stripe-implementation-planner","d":"Plans which Stripe products to use and how billing fits the app before coding.","s":"Candidate"}]},{"t":"Threat Modeler","skills":[{"n":"threat-model","d":"Produces a threat model: what can go wrong, who can attack it, what must hold.","s":"Candidate"}]}]}]},{"id":"design","name":"UX/UI Design","does":"Designs how the product looks, feels and moves.","leads":[{"n":"Camille Mendoza","t":"UX Design Lead","skills":[{"n":"bmad-agent-ux-designer","d":"UX designer and UI specialist persona.","s":"Approved"}],"staff":[{"t":"UX Designer","skills":[{"n":"bmad-ux","d":"Writes DESIGN.md (how it looks) and EXPERIENCE.md (how it behaves).","s":"Approved"}]},{"t":"Design Handoff Specialist","skills":[{"n":"understand-figma","d":"Maps a Figma file's screens, components and design tokens.","s":"Approved"}]}]},{"n":"Joaquin Ramos","t":"UI Design Lead","skills":[{"n":"ui-ux-pro-max","d":"Proposes a full design system for your product: layout pattern, style, colors, fonts, do's and don'ts.","s":"Shortlisted"}],"staff":[{"t":"UI Designer","skills":[{"n":"design-system","d":"Builds design tokens, CSS variables and component specs.","s":"Shortlisted"},{"n":"ui-styling","d":"Styles interfaces with shadcn/ui and Tailwind.","s":"Shortlisted"}]},{"t":"Brand Designer","skills":[{"n":"brand","d":"Sets brand voice, visual identity and style guide.","s":"Shortlisted"},{"n":"banner-design","d":"Designs banners, ads and website hero images.","s":"Shortlisted"},{"n":"design","d":"Creates logos, icons and identity assets (needs an AI image key).","s":"Shortlisted"},{"n":"slides","d":"Makes HTML presentation decks.","s":"Shortlisted"}]},{"t":"Motion Designer","skills":[{"n":"motion","d":"Animation best practices, spring generator and animation performance audit.","s":"Shortlisted"},{"n":"motion-reviewer","d":"Reviews animation code for smoothness and performance.","s":"Shortlisted"}]}]}]},{"id":"frontend","name":"Front End","does":"Builds what users see in the browser.","leads":[{"n":"Patricia Aquino","t":"Front End Lead","skills":[{"n":"react-reviewer","d":"Reviews React and TypeScript code.","s":"Shortlisted"},{"n":"typescript-reviewer","d":"Reviews React and TypeScript code.","s":"Shortlisted"}],"staff":[{"t":"Front End Developer","skills":[{"n":"frontend-ui-engineering","d":"Builds production-quality, accessible, responsive user interfaces.","s":"Shortlisted"},{"n":"react-patterns","d":"React patterns and best practices.","s":"Shortlisted"},{"n":"typescript-patterns","d":"TypeScript patterns and safe typing.","s":"Shortlisted"},{"n":"nextjs-turbopack","d":"Next.js app setup and patterns.","s":"Shortlisted"}]},{"t":"Component Specialist","skills":[{"n":"21st.dev CLI","d":"Finds and installs ready-made React/shadcn components.","s":"Shortlisted"}]},{"t":"React Performance Specialist","skills":[{"n":"react-performance","d":"Makes React apps faster.","s":"Shortlisted"}]},{"t":"Email Template Developer","skills":[{"n":"react-email","d":"Builds email templates as React components.","s":"Candidate"}]},{"t":"SEO Specialist","skills":[{"n":"seo","d":"Search engine optimization for web pages.","s":"Shortlisted"}]}]}]},{"id":"backend","name":"Back End","does":"Builds APIs, databases, login and payments.","leads":[{"n":"Rafael Garcia","t":"Back End Lead","skills":[{"n":"backend-patterns","d":"Node/Express/Next API patterns.","s":"Shortlisted"},{"n":"contract-first","d":"Writes the OpenAPI contract before the API code.","s":"Shortlisted"}],"staff":[{"t":"API Developer","skills":[{"n":"hono","d":"Builds fast APIs with Hono: routes, middleware, validation and tests.","s":"Candidate"},{"n":"error-handling","d":"Consistent error handling across the app.","s":"Shortlisted"},{"n":"migration","d":"Safe, reversible schema, data and API migrations.","s":"Approved"}]},{"t":"Edge / Cloud Developer","skills":[{"n":"workers-best-practices","d":"Rules for writing and reviewing production Cloudflare Workers code.","s":"Candidate"},{"n":"durable-objects","d":"Builds features that need shared live state, like chat rooms or live collaboration.","s":"Candidate"}]},{"t":"Jobs & Email Developer","skills":[{"n":"resend","d":"Sends and receives email through Resend.","s":"Candidate"},{"n":"email-best-practices","d":"Keeps email out of spam: SPF/DKIM/DMARC, bounces and sign-up flows.","s":"Candidate"},{"n":"inngest-setup","d":"Adds background jobs that retry and survive crashes (option to Cloudflare Queues).","s":"Candidate"},{"n":"inngest-durable-functions","d":"Writes scheduled and event-driven jobs with automatic retries.","s":"Candidate"}]},{"t":"Payments Engineer","skills":[{"n":"customer-billing-ops","d":"Stripe billing and subscription operations for the SaaS tool.","s":"Shortlisted"},{"n":"stripe-best-practices","d":"Official Stripe guidance on test setups, webhooks and integration choices.","s":"Candidate"}]}]},{"n":"Kristine Navarro","t":"Data & Auth Lead","skills":[{"n":"database-reviewer","d":"Reviews database schema and queries.","s":"Shortlisted"}],"staff":[{"t":"Database Engineer","skills":[{"n":"postgres-patterns","d":"PostgreSQL schema, query, index and security patterns.","s":"Shortlisted"},{"n":"neon-postgres","d":"Neon database connections, migrations and per-branch test databases.","s":"Candidate"},{"n":"prisma-orm-setup","d":"Sets up Prisma and connects it to the database (official, newer than prisma-patterns).","s":"Candidate"},{"n":"prisma-client-api","d":"Reference for writing Prisma database queries correctly.","s":"Candidate"},{"n":"prisma-patterns","d":"Prisma ORM patterns.","s":"Shortlisted"}]},{"t":"Auth Engineer","skills":[{"n":"create-auth","d":"Adds sign-up and login to the app with Better Auth.","s":"Candidate"},{"n":"better-auth best-practices","d":"Sets up Better Auth sessions, database link and plugins the right way.","s":"Candidate"},{"n":"emailAndPassword","d":"Email verification, password reset and password rules.","s":"Candidate"},{"n":"organization","d":"Team accounts, invites, roles and permissions for a B2B SaaS.","s":"Candidate"}]}]}]},{"id":"fullstack","name":"Full Stack","does":"Builds features end to end and fixes bugs.","leads":[{"n":"Carlo Mercado","t":"Full Stack Lead","skills":[{"n":"bmad-agent-dev","d":"Senior engineer persona who implements stories and code changes.","s":"Approved"},{"n":"bmad-build","d":"Builds a story or fix end to end: plan, code, review, verify.","s":"Approved"}],"staff":[{"t":"Full Stack Developer","skills":[{"n":"bmad-build-auto","d":"Same as bmad-build but runs without stopping to ask.","s":"Approved"},{"n":"lean-build","d":"Builds a feature with strict scope so it isn't overbuilt.","s":"Approved"},{"n":"nextjs-on-cloudflare","d":"Sets up, moves and deploys Next.js apps on Cloudflare Workers.","s":"Candidate"},{"n":"workers-development","d":"Runs and debugs Cloudflare Workers apps on the developer's machine.","s":"Candidate"}]},{"t":"Prototype Engineer","skills":[{"n":"prototype","d":"Builds a throwaway prototype to answer a UI or logic question fast.","s":"Shortlisted"}]},{"t":"Maintenance Engineer","skills":[{"n":"surgical-patch","d":"Fixes a bug at the narrowest spot, with proof it stays fixed.","s":"Approved"},{"n":"safe-refactor","d":"Restructures code without changing what it does.","s":"Approved"}]},{"t":"Debugging Specialist","skills":[{"n":"investigate-first","d":"Diagnoses an unclear failure before editing anything.","s":"Approved"},{"n":"build-error-resolver","d":"Fixes broken builds and compile errors.","s":"Shortlisted"}]},{"t":"AI Engineer","skills":[{"n":"agents-sdk","d":"Builds AI agents and AI features that run on Cloudflare.","s":"Candidate"}]}]}]},{"id":"mobile","name":"Mobile","does":"Builds iOS, Android and cross-platform apps.","leads":[{"n":"Jasmine Castillo","t":"Mobile Lead","skills":[{"n":"expo-overview","d":"Front door for Expo work: picks the right Expo skill for the task.","s":"Candidate"},{"n":"react-native-patterns","d":"React Native and Expo app patterns.","s":"Shortlisted"}],"staff":[{"t":"Mobile Developer","skills":[{"n":"expo-router","d":"Screens and navigation in Expo apps.","s":"Candidate"},{"n":"expo-data-fetching","d":"Loading data in the app: API calls, caching, retries and offline.","s":"Candidate"}]},{"t":"Mobile UI Developer","skills":[{"n":"expo-native-ui","d":"Makes Expo screens look and feel native on iPhone and Android.","s":"Candidate"}]},{"t":"Mobile Release Engineer","skills":[{"n":"eas-app-stores","d":"Builds the app and submits it to TestFlight, the App Store and Google Play.","s":"Candidate"},{"n":"eas-update","d":"Pushes quick fixes to installed apps without a new store release.","s":"Candidate"}]},{"t":"iOS Developer (when needed)","skills":[{"n":"swiftui-patterns","d":"Native iOS apps with SwiftUI.","s":"Shortlisted"}]},{"t":"Android Developer (when needed)","skills":[{"n":"android-clean-architecture","d":"Native Android app structure.","s":"Shortlisted"}]},{"t":"Flutter Developer (when needed)","skills":[{"n":"dart-flutter-patterns","d":"Flutter and Dart app patterns.","s":"Shortlisted"}]}]}]},{"id":"qa","name":"QA & Testing","does":"Proves it works, is accessible and is fast.","leads":[{"n":"Mark Anthony Torres","t":"QA Lead","skills":[{"n":"test-driven-development","d":"Writes the test first, then the code (red-green-refactor).","s":"Shortlisted"},{"n":"verify-and-stop","d":"Proves work meets its acceptance criteria without adding scope.","s":"Approved"}],"staff":[{"t":"QA Engineer","skills":[{"n":"test-engineer","d":"Plans test strategy, writes tests and checks coverage.","s":"Shortlisted"},{"n":"browser-testing-with-devtools","d":"Tests the app in a real browser (DOM, console, network).","s":"Shortlisted"},{"n":"property-based-testing","d":"Writes tests that throw thousands of random inputs at the code.","s":"Candidate"}]},{"t":"QA Automation Engineer","skills":[{"n":"e2e-testing","d":"End-to-end tests with Playwright.","s":"Shortlisted"},{"n":"e2e-runner","d":"Runs and fixes end-to-end test suites.","s":"Shortlisted"},{"n":"bmad-qa-generate-e2e-tests","d":"Adds end-to-end and API tests for features that already work.","s":"Approved"}]},{"t":"Accessibility Specialist","skills":[{"n":"accessibility-engineering","d":"Audits and fixes WCAG 2.2 AA accessibility issues.","s":"Shortlisted"},{"n":"accessibility-auditor","d":"Reviews screens for screen-reader and keyboard use.","s":"Shortlisted"}]},{"t":"Performance Engineer","skills":[{"n":"performance-optimization","d":"Finds and fixes slow front end, back end and database code.","s":"Shortlisted"},{"n":"web-performance-auditor","d":"Audits Core Web Vitals and page speed.","s":"Shortlisted"},{"n":"web-perf","d":"Audits page speed and Core Web Vitals.","s":"Candidate"}]}]}]},{"id":"security","name":"Cybersecurity","does":"Finds and blocks security holes before and after release.","leads":[{"n":"Leandro Pascual","t":"Application Security Lead","skills":[{"n":"security-and-hardening","d":"Hardens code against common vulnerabilities (input, auth, data, integrations).","s":"Shortlisted"}],"staff":[{"t":"Application Security Engineer","skills":[{"n":"security-review","d":"Security checklist for auth, user input, secrets, APIs and payments.","s":"Shortlisted"},{"n":"vibe-security","d":"Finds the security mistakes AI coding tools typically make (exposed keys, broken Supabase/Firebase access rules).","s":"Candidate"},{"n":"turnstile-spin","d":"Adds Cloudflare's bot check to forms, including the server-side check.","s":"Candidate"}]},{"t":"Security Architect","skills":[{"n":"sharp-edges","d":"Flags dangerous APIs, risky defaults and easy-to-misuse designs.","s":"Candidate"}]},{"t":"Identity & Access Engineer","skills":[{"n":"twoFactor","d":"Adds two-step login (authenticator app, codes, backup codes).","s":"Candidate"},{"n":"better-auth security","d":"Login security: rate limits, CSRF, secure cookies and secrets.","s":"Candidate"}]},{"t":"Network Security Engineer","skills":[{"n":"cloudflare-one","d":"Puts admin tools behind Cloudflare Zero Trust login.","s":"Candidate"}]}]},{"n":"Angelica Domingo","t":"Security Audit Lead","skills":[{"n":"security-audit","d":"Six-phase security audit where every finding is independently re-checked.","s":"Candidate"},{"n":"security-auditor","d":"Security reviewer focused on vulnerabilities and threat modeling.","s":"Shortlisted"}],"staff":[{"t":"Security Auditor","skills":[{"n":"audit-context-building","d":"Maps what each function assumes and guarantees before hunting bugs.","s":"Candidate"},{"n":"fp-check","d":"Confirms or rejects a suspected bug so you don't chase false alarms.","s":"Candidate"},{"n":"variant-analysis","d":"After one bug is found, hunts for the same bug elsewhere.","s":"Candidate"},{"n":"cvss-scoring","d":"Scores how severe a vulnerability is (CVSS v4).","s":"Candidate"}]},{"t":"Security Code Reviewer","skills":[{"n":"differential-review","d":"Security review of a code change or PR.","s":"Candidate"}]},{"t":"Security Scanner Engineer","skills":[{"n":"semgrep","d":"Runs a Semgrep security scan after showing you the plan.","s":"Candidate"},{"n":"codeql","d":"Deep security scan that traces untrusted data through the code.","s":"Candidate"}]},{"t":"Supply-Chain Security Engineer","skills":[{"n":"mcp-dependency-review","d":"Checks MCP configs for risky, unpinned packages before you approve them.","s":"Shortlisted"},{"n":"supply-chain-risk-auditor","d":"Checks every dependency for known advisories and supply-chain risk.","s":"Candidate"},{"n":"SkillSpector","d":"Scans agent skills for malicious or risky code before you install them.","s":"Candidate"}]},{"t":"DevSecOps Engineer","skills":[{"n":"agentic-actions-auditor","d":"Audits GitHub Actions that run AI agents for security holes.","s":"Candidate"},{"n":"claude-code-security-review","d":"GitHub Action that reviews every pull request for vulnerabilities.","s":"Candidate"}]},{"t":"Security Officer","skills":[{"n":"git-guardrails-claude-code","d":"Blocks dangerous git commands like force-push and reset --hard (hook).","s":"Shortlisted"}]}]}]},{"id":"devops","name":"DevOps & Release","does":"Ships it safely and keeps it running.","leads":[{"n":"Jerome Salazar","t":"DevOps Lead","skills":[{"n":"ci-cd-and-automation","d":"Sets up build, test and deploy pipelines.","s":"Shortlisted"},{"n":"deployment-patterns","d":"Deployment patterns and rollouts.","s":"Shortlisted"}],"staff":[{"t":"DevOps Engineer","skills":[{"n":"git-workflow-and-versioning","d":"Clean branches, commits and merges.","s":"Shortlisted"},{"n":"caveman-commit","d":"Writes short, clear commit messages.","s":"Approved"},{"n":"docker-patterns","d":"Docker and Compose setup, including container security.","s":"Shortlisted"}]},{"t":"Cloudflare Deploy Engineer","skills":[{"n":"wrangler","d":"Runs Cloudflare's deploy tool for local dev, previews and releases.","s":"Candidate"},{"n":"cloudflare-app-bootstrap","d":"Wires a new Workers app's database, secrets and data until it runs.","s":"Candidate"}]},{"t":"Mobile Pipeline Engineer","skills":[{"n":"eas-workflows","d":"Writes the build-and-release pipeline for the mobile app.","s":"Candidate"}]},{"t":"Site Reliability Engineer","skills":[{"n":"observability-and-instrumentation","d":"Adds logging, metrics, tracing and alerts so production issues are visible.","s":"Shortlisted"},{"n":"workers-profiling","d":"Finds slow or memory-hungry code in live Cloudflare Workers.","s":"Candidate"}]},{"t":"Release Manager","skills":[{"n":"shipping-and-launch","d":"Pre-launch checklist and safe production release.","s":"Shortlisted"}]}]}]},{"id":"leadership","name":"Engineering Leadership","does":"Sets standards, reviews code and keeps every agent on the same rules.","leads":[{"n":"Ramon Villareal","t":"Head of Engineering","skills":[{"n":"bmad-code-review","d":"Several reviewers check a change in parallel, then findings are triaged.","s":"Approved"},{"n":"code-reviewer","d":"Reviews changes for correctness, readability, architecture, security and performance.","s":"Shortlisted"}],"staff":[{"t":"Lead Reviewer","skills":[{"n":"caveman-review","d":"Short code review: one line per finding with location and fix.","s":"Approved"},{"n":"bmad-review","d":"Adversarial review of a draft or plan: edge cases, gaps, structure.","s":"Approved"},{"n":"bmad-walkthrough","d":"Guides a human through reviewing a commit, PR or folder.","s":"Approved"}]},{"t":"Tech Lead","skills":[{"n":"bmad-project-context","d":"Sets up and maintains the AGENTS.md rules every agent follows in a repo.","s":"Approved"},{"n":"context-engineering","d":"Keeps agent context and rules files lean so output stays sharp.","s":"Shortlisted"}]},{"t":"Technical Writer","skills":[{"n":"documentation-and-adrs","d":"Records decisions (ADRs) and flags docs that drift from the code.","s":"Shortlisted"}]},{"t":"Engineering Manager","skills":[{"n":"bmad-retrospective","d":"Reviews a finished epic and writes lessons learned.","s":"Approved"}]}]}]}];
+const PERSON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>';
+const BUILD = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-3 8 3v16"/><path d="M9 21v-5h6v5M8 8h2M14 8h2M8 12h2M14 12h2"/></svg>';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const initials = n => n.split(/\s+/).filter(w => /^[A-Z]/.test(w)).map(w => w[0]).slice(0, 2).join('');
+const nLeads = DATA.reduce((a, d) => a + d.leads.length, 0);
+const nStaff = DATA.reduce((a, d) => a + d.leads.reduce((b, l) => b + l.staff.length, 0), 0);
+document.getElementById('counts').textContent = `${DATA.length} departments · ${nLeads} leads · ${nStaff} specialist agents`;
+
+const reg = []; // registry of clickable people
+function addReg(o) { reg.push(o); return reg.length - 1 }
+
+function leadUnit(dept, l) {
+  const li = addReg({ kind: 'lead', name: l.n, role: l.t, dept: dept.name, reports: 'IT Department', skills: l.skills, staff: l.staff });
+  const staff = l.staff.map(s => {
+    const i = addReg({ kind: 'staff', name: s.t, role: s.t, dept: dept.name, reports: `${l.n} (${l.t})`, skills: s.skills });
+    return `<li><button class="node n-staff" data-i="${i}" type="button"><span class="photo">${PERSON}</span><span class="txt"><span class="rl">${esc(s.t)}</span><span class="sk">${s.skills.length} skill${s.skills.length > 1 ? 's' : ''}</span></span></button></li>`;
+  }).join('');
+  return `<li><div class="unit"><button class="node n-lead" data-i="${li}" type="button"><span class="photo">${initials(l.n)}</span><span class="nm">${esc(l.n)}</span><span class="rl">${esc(l.t)}</span></button><ul class="staff">${staff}</ul></div></li>`;
+}
+function deptNode(d) {
+  const i = addReg({ kind: 'dept', name: d.name + ' Department', role: d.does, dept: d.name, leads: d.leads });
+  return `<li><button class="node n-dept" data-i="${i}" type="button"><span class="photo">${BUILD}</span><span class="nm">${esc(d.name)}</span><span class="rl">${d.leads.length} lead${d.leads.length > 1 ? 's' : ''} · ${d.leads.reduce((a, l) => a + l.staff.length, 0)} specialists</span></button><ul>${d.leads.map(l => leadUnit(d, l)).join('')}</ul></li>`;
+}
+function rootNode(inner) {
+  const i = addReg({ kind: 'root', name: 'IT Department', role: 'Senior Dev Agents', dept: '' });
+  return `<ul><li><button class="node n-root" data-i="${i}" type="button"><span class="photo">${BUILD}</span><span class="nm">IT Department</span><span class="rl">Senior Dev Agents</span></button><ul>${inner}</ul></li></ul>`;
+}
+
+const tree = document.getElementById('tree'), canvas = document.getElementById('canvas'), dir = document.getElementById('dir');
+let zoomMode = 'fit';
+function applyZoom() {
+  tree.style.zoom = 1;
+  const w = tree.scrollWidth, avail = canvas.clientWidth - 32;
+  const z = zoomMode === 'fit' ? Math.min(1, avail / w) : 1;
+  tree.style.zoom = z;
+  document.getElementById('zFit').setAttribute('aria-pressed', zoomMode === 'fit');
+  document.getElementById('z100').setAttribute('aria-pressed', zoomMode === '100');
+}
+document.getElementById('zFit').onclick = () => { zoomMode = 'fit'; applyZoom() };
+document.getElementById('z100').onclick = () => { zoomMode = '100'; applyZoom() };
+addEventListener('resize', applyZoom);
+
+const tabs = document.getElementById('tabs');
+tabs.innerHTML = `<button class="tab" role="tab" data-v="all" type="button">Whole company</button>` + DATA.map(d => `<button class="tab" role="tab" data-v="${d.id}" type="button">${esc(d.name)}</button>`).join('');
+tabs.onclick = e => { const b = e.target.closest('.tab'); if (b) location.hash = b.dataset.v === 'all' ? '' : b.dataset.v; if (b && b.dataset.v === 'all') render('all') };
+
+function chipList(skills) { return `<div class="chips">${skills.map(s => `<span class="chip c-${s.s}">${esc(s.n)}</span>`).join('')}</div>` }
+
+function render(view) {
+  reg.length = 0;
+  tabs.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.v === view));
+  const intro = document.getElementById('introText');
+  if (view === 'all') {
+    tree.innerHTML = rootNode(DATA.map(deptNode).join(''));
+    intro.textContent = 'The whole team, from scoping to release. Click any box to see that agent’s skills. Pick a department above for a closer view.';
+    dir.hidden = true; zoomMode = 'fit';
+  } else {
+    const d = DATA.find(x => x.id === view);
+    tree.innerHTML = rootNode(deptNode(d));
+    intro.textContent = d.does + ' Click any box for skill details.';
+    dir.innerHTML = `<div><h2>${esc(d.name)} agents and skills</h2><p class="sub">Purple skills are candidates you haven’t approved yet.</p></div>` +
+      d.leads.map(l => {
+        const lead = reg.findIndex(r => r.kind === 'lead' && r.name === l.n);
+        return `<div class="team"><div class="team-head"><b>${esc(l.n)}</b><span>${esc(l.t)}</span></div><div class="agents">` +
+          `<button class="agent" data-i="${lead}" type="button"><span class="rl">${esc(l.t)} (lead)</span>${chipList(l.skills)}</button>` +
+          l.staff.map(s => { const i = reg.findIndex(r => r.kind === 'staff' && r.name === s.t && r.dept === d.name); return `<button class="agent" data-i="${i}" type="button"><span class="rl">${esc(s.t)}</span>${chipList(s.skills)}</button>` }).join('') +
+          `</div></div>`;
+      }).join('');
+    dir.hidden = false; zoomMode = 'fit';
+  }
+  applyZoom();
+  const active = tabs.querySelector('[aria-selected="true"]'); if (active) active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+}
+
+const drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
+function skillCard(s) { return `<div class="skill"><div class="top"><code>${esc(s.n)}</code><span class="st st-${s.s}">${s.s}</span></div><p>${esc(s.d)}</p></div>` }
+function open(i) {
+  const r = reg[i]; if (!r) return;
+  const ph = document.getElementById('dPhoto');
+  ph.innerHTML = r.kind === 'lead' ? initials(r.name) : (r.kind === 'staff' ? PERSON : BUILD);
+  document.getElementById('dTitle').textContent = r.name;
+  let sub = '', body = '';
+  if (r.kind === 'lead') {
+    sub = `${r.role} · ${r.dept}`;
+    body = `<p class="d-label">Lead skills</p>${r.skills.map(skillCard).join('')}<p class="d-label">Team</p>${chipList(r.staff.map(s => ({ n: s.t, s: '' })))}`;
+  } else if (r.kind === 'staff') {
+    sub = `${r.dept} · reports to ${r.reports}`;
+    body = `<p class="d-label">Skills</p>${r.skills.map(skillCard).join('')}`;
+  } else if (r.kind === 'dept') {
+    sub = r.role;
+    body = r.leads.map(l => `<p class="d-label">${esc(l.n)} · ${esc(l.t)}</p>${chipList(l.staff.map(s => ({ n: s.t, s: '' })))}`).join('');
+  } else {
+    sub = `${DATA.length} departments · ${nLeads} leads · ${nStaff} specialist agents`;
+    body = `<p class="note">Every agent follows caveman as the company standard: short answers and small, safe changes. Nothing is installed yet. Photos come later.</p>`;
+  }
+  if (r.kind === 'lead' || r.kind === 'staff') body += `<p class="note">Also follows caveman, the company standard for every agent.</p>`;
+  document.getElementById('dSub').textContent = sub;
+  document.getElementById('dBody').innerHTML = body;
+  drawer.hidden = false; scrim.hidden = false; document.getElementById('dClose').focus();
+}
+function close() { drawer.hidden = true; scrim.hidden = true }
+document.addEventListener('click', e => { const n = e.target.closest('[data-i]'); if (n) open(+n.dataset.i) });
+document.getElementById('dClose').onclick = close; scrim.onclick = close;
+addEventListener('keydown', e => { if (e.key === 'Escape') close() });
+
+function route() { const h = location.hash.slice(1); render(DATA.some(d => d.id === h) ? h : 'all') }
+addEventListener('hashchange', route);
+route();
+</script>

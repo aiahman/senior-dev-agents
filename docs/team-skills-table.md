@@ -1,0 +1,179 @@
+# Senior Dev Agents: skills by department
+
+One row per skill. Status: **Approved** = you already picked it. **Shortlisted** = on the install shortlist, waiting for your OK. **Candidate** = new from the security, scoping and tech-stack research, not reviewed for approval yet. Rows follow the build order: understand and scope, design, build, test, secure, ship. Nothing is installed.
+
+| # | Skill | What it does | Suggested agent role | Department | Source | Status |
+|---|---|---|---|---|---|---|
+| 1 | bmad | Front door of BMAD: tells you which skill to use next and sets the method up. | Project Coordinator | Product & Business Analysis | BMAD | Approved |
+| 2 | bmad-agent-analyst | Business analyst who researches the market and competitors and pins down requirements. | Business Analyst | Product & Business Analysis | BMAD | Approved |
+| 3 | bmad-brainstorming | Runs a brainstorming session with different creative techniques. | Business Analyst | Product & Business Analysis | BMAD | Approved |
+| 4 | bmad-forge-idea | Has several personas poke holes in a half-formed idea until you can act on it or drop it. | Business Analyst | Product & Business Analysis | BMAD | Approved |
+| 5 | bmad-advanced-elicitation | Critiques a first draft and proposes one stronger revision. | Business Analyst | Product & Business Analysis | BMAD | Approved |
+| 6 | bmad-ingest | Turns a transcript, voice memo or long document into cited notes the agents can use. | Business Analyst | Product & Business Analysis | BMAD | Approved |
+| 7 | bmad-agent-pm | Product manager who writes and reviews the product requirements document (PRD). | Product Manager | Product & Business Analysis | BMAD | Approved |
+| 8 | bmad-agent-po | Product owner who turns ideas into epics, user stories and acceptance criteria. | Product Owner | Product & Business Analysis | BMAD | Approved |
+| 9 | bmad-party-mode | Lets several team personas discuss one question together, like a meeting. | Product Manager (meeting host) | Product & Business Analysis | BMAD | Approved |
+| 10 | bmad-facilitate | Coaches you through writing or checking a planning document. | Product Manager | Product & Business Analysis | BMAD | Approved |
+| 11 | spec-to-code-compliance | Checks code against its spec: which requirements hold, which are broken, which are missing. | Product Owner (acceptance) | Product & Business Analysis | trailofbits/skills | Candidate |
+| 12 | brainstorming (superpowers) | Forces a design conversation before any new feature is built. | Business Analyst | Product & Business Analysis | obra/superpowers | Candidate |
+| 13 | writing-plans (superpowers) | Turns a spec into a step-by-step build plan before code is touched. | Product Owner | Product & Business Analysis | obra/superpowers | Candidate |
+| 14 | bmad-deep-recon | Decision-grade research on a topic or repo, with sources. | Research Analyst | Research & Discovery | BMAD | Approved |
+| 15 | understand | Builds a knowledge graph of a codebase so agents understand how it fits together. | Codebase Analyst | Research & Discovery | Understand-Anything | Approved |
+| 16 | understand-chat | Answers questions about the codebase using that graph. | Codebase Analyst | Research & Discovery | Understand-Anything | Approved |
+| 17 | understand-explain | Gives a deep-dive explanation of one file, function or module. | Codebase Analyst | Research & Discovery | Understand-Anything | Approved |
+| 18 | understand-domain | Maps the business flows (domains, steps) hidden in the code. | Codebase Analyst | Research & Discovery | Understand-Anything | Approved |
+| 19 | understand-diff | Explains what a change or PR touches and how risky it is. | Codebase Analyst | Research & Discovery | Understand-Anything | Approved |
+| 20 | understand-onboard | Writes an onboarding guide for someone new to the project. | Codebase Analyst | Research & Discovery | Understand-Anything | Approved |
+| 21 | understand-dashboard | Opens the knowledge graph as an interactive map in your browser. | Codebase Analyst | Research & Discovery | Understand-Anything | Approved |
+| 22 | understand-knowledge | Turns a notes or wiki folder into a searchable knowledge graph. | Knowledge Manager | Research & Discovery | Understand-Anything | Approved |
+| 23 | reverse-engineer-anything | Looks inside an app you don't have the code for and explains how a feature works, with evidence. | Reverse Engineer | Research & Discovery | REA | Approved |
+| 24 | bmad-agent-architect | System architect who leads technical design. | Solution Architect | Solution Architecture | BMAD | Approved |
+| 25 | bmad-architecture | Records the key architecture decisions in one short document. | Solution Architect | Solution Architecture | BMAD | Approved |
+| 26 | api-and-interface-design | Designs stable APIs and module boundaries (REST, GraphQL, types). | Solution Architect | Solution Architecture | addyosmani/agent-skills | Shortlisted |
+| 27 | codebase-design | Gives a shared vocabulary for designing simple, deep modules. | Solution Architect | Solution Architecture | mattpocock/skills | Shortlisted |
+| 28 | improve-codebase-architecture | Scans the codebase for refactors worth doing and reports them. | Solution Architect | Solution Architecture | mattpocock/skills | Shortlisted |
+| 29 | threat-model (8 skills) | Produces a threat model: what can go wrong, who can attack it, what must hold. | Threat Modeler | Solution Architecture | alpha-omega-security/threat-model | Candidate |
+| 30 | cloudflare | Helps pick the right Cloudflare product for an app, API, storage or security need. | Cloud Architect | Solution Architecture | cloudflare/skills | Candidate |
+| 31 | stripe-implementation-planner | Plans which Stripe products to use and how billing fits the app before coding. | Payments Architect | Solution Architecture | stripe/ai | Candidate |
+| 32 | bmad-agent-ux-designer | UX designer and UI specialist persona. | UX Designer | UX/UI Design | BMAD | Approved |
+| 33 | bmad-ux | Writes DESIGN.md (how it looks) and EXPERIENCE.md (how it behaves). | UX Designer | UX/UI Design | BMAD | Approved |
+| 34 | understand-figma | Maps a Figma file's screens, components and design tokens. | UX Designer | UX/UI Design | Understand-Anything | Approved |
+| 35 | ui-ux-pro-max | Proposes a full design system for your product: layout pattern, style, colors, fonts, do's and don'ts. | UI Designer | UX/UI Design | ui-ux-pro-max-skill | Shortlisted |
+| 36 | design-system | Builds design tokens, CSS variables and component specs. | UI Designer | UX/UI Design | ui-ux-pro-max-skill | Shortlisted |
+| 37 | ui-styling | Styles interfaces with shadcn/ui and Tailwind. | UI Designer | UX/UI Design | ui-ux-pro-max-skill | Shortlisted |
+| 38 | brand | Sets brand voice, visual identity and style guide. | Brand Designer | UX/UI Design | ui-ux-pro-max-skill | Shortlisted |
+| 39 | banner-design | Designs banners, ads and website hero images. | Brand Designer | UX/UI Design | ui-ux-pro-max-skill | Shortlisted |
+| 40 | design (logo, icons) | Creates logos, icons and identity assets (needs an AI image key). | Brand Designer | UX/UI Design | ui-ux-pro-max-skill | Shortlisted |
+| 41 | slides | Makes HTML presentation decks. | Brand Designer | UX/UI Design | ui-ux-pro-max-skill | Shortlisted |
+| 42 | motion | Animation best practices, spring generator and animation performance audit. | Motion Designer | UX/UI Design | Motion AI Kit | Shortlisted |
+| 43 | motion-reviewer (agent) | Reviews animation code for smoothness and performance. | Motion Designer | UX/UI Design | Motion AI Kit | Shortlisted |
+| 44 | frontend-ui-engineering | Builds production-quality, accessible, responsive user interfaces. | Front End Developer | Front End | addyosmani/agent-skills | Shortlisted |
+| 45 | 21st.dev CLI | Finds and installs ready-made React/shadcn components. | Front End Developer | Front End | 21st.dev CLI | Shortlisted |
+| 46 | react-patterns | React patterns and best practices. | Front End Developer | Front End | ECC | Shortlisted |
+| 47 | react-performance | Makes React apps faster. | Front End Developer | Front End | ECC | Shortlisted |
+| 48 | typescript-patterns | TypeScript patterns and safe typing. | Front End Developer | Front End | ECC | Shortlisted |
+| 49 | nextjs-turbopack | Next.js app setup and patterns. | Front End Developer | Front End | ECC | Shortlisted |
+| 50 | seo | Search engine optimization for web pages. | SEO Specialist | Front End | ECC | Shortlisted |
+| 51 | react-reviewer / typescript-reviewer (agents) | Reviews React and TypeScript code. | Front End Reviewer | Front End | ECC | Shortlisted |
+| 52 | react-email | Builds email templates as React components. | Front End Developer | Front End | resend/resend-skills | Candidate |
+| 53 | backend-patterns | Node/Express/Next API patterns. | Back End Developer | Back End | ECC | Shortlisted |
+| 54 | postgres-patterns | PostgreSQL schema, query, index and security patterns. | Database Engineer | Back End | ECC | Shortlisted |
+| 55 | prisma-patterns | Prisma ORM patterns. | Back End Developer | Back End | ECC | Shortlisted |
+| 56 | contract-first | Writes the OpenAPI contract before the API code. | Back End Developer | Back End | ECC | Shortlisted |
+| 57 | error-handling | Consistent error handling across the app. | Back End Developer | Back End | ECC | Shortlisted |
+| 58 | migration | Safe, reversible schema, data and API migrations. | Back End Developer | Back End | caveman | Approved |
+| 59 | customer-billing-ops | Stripe billing and subscription operations for the SaaS tool. | Payments Engineer | Back End | ECC | Shortlisted |
+| 60 | database-reviewer (agent) | Reviews database schema and queries. | Database Engineer | Back End | ECC | Shortlisted |
+| 61 | hono | Builds fast APIs with Hono: routes, middleware, validation and tests. | Back End Developer | Back End | honojs/skills | Candidate |
+| 62 | workers-best-practices | Rules for writing and reviewing production Cloudflare Workers code. | Edge / Cloud Developer | Back End | cloudflare/skills | Candidate |
+| 63 | durable-objects | Builds features that need shared live state, like chat rooms or live collaboration. | Edge / Cloud Developer | Back End | cloudflare/skills | Candidate |
+| 64 | neon-postgres | Neon database connections, migrations and per-branch test databases. | Database Engineer | Back End | neondatabase/agent-skills | Candidate |
+| 65 | prisma-orm-setup | Sets up Prisma and connects it to the database (official, newer than prisma-patterns). | Database Engineer | Back End | prisma/skills | Candidate |
+| 66 | prisma-client-api | Reference for writing Prisma database queries correctly. | Database Engineer | Back End | prisma/skills | Candidate |
+| 67 | create-auth | Adds sign-up and login to the app with Better Auth. | Auth Engineer | Back End | better-auth/skills | Candidate |
+| 68 | better-auth best-practices | Sets up Better Auth sessions, database link and plugins the right way. | Auth Engineer | Back End | better-auth/skills | Candidate |
+| 69 | emailAndPassword | Email verification, password reset and password rules. | Auth Engineer | Back End | better-auth/skills | Candidate |
+| 70 | organization | Team accounts, invites, roles and permissions for a B2B SaaS. | Auth Engineer | Back End | better-auth/skills | Candidate |
+| 71 | stripe-best-practices | Official Stripe guidance on test setups, webhooks and integration choices. | Payments Engineer | Back End | stripe/ai | Candidate |
+| 72 | resend | Sends and receives email through Resend. | Back End Developer | Back End | resend/resend-skills | Candidate |
+| 73 | email-best-practices | Keeps email out of spam: SPF/DKIM/DMARC, bounces and sign-up flows. | Back End Developer | Back End | resend/resend-skills | Candidate |
+| 74 | inngest-setup | Adds background jobs that retry and survive crashes (option to Cloudflare Queues). | Back End Developer | Back End | inngest/inngest-skills | Candidate |
+| 75 | inngest-durable-functions | Writes scheduled and event-driven jobs with automatic retries. | Back End Developer | Back End | inngest/inngest-skills | Candidate |
+| 76 | bmad-agent-dev | Senior engineer persona who implements stories and code changes. | Full Stack Developer | Full Stack | BMAD | Approved |
+| 77 | bmad-build | Builds a story or fix end to end: plan, code, review, verify. | Full Stack Developer | Full Stack | BMAD | Approved |
+| 78 | bmad-build-auto | Same as bmad-build but runs without stopping to ask. | Full Stack Developer | Full Stack | BMAD | Approved |
+| 79 | lean-build | Builds a feature with strict scope so it isn't overbuilt. | Full Stack Developer | Full Stack | caveman | Approved |
+| 80 | prototype | Builds a throwaway prototype to answer a UI or logic question fast. | Prototype Engineer | Full Stack | mattpocock/skills | Shortlisted |
+| 81 | surgical-patch | Fixes a bug at the narrowest spot, with proof it stays fixed. | Maintenance Engineer | Full Stack | caveman | Approved |
+| 82 | safe-refactor | Restructures code without changing what it does. | Maintenance Engineer | Full Stack | caveman | Approved |
+| 83 | investigate-first | Diagnoses an unclear failure before editing anything. | Debugging Specialist | Full Stack | caveman | Approved |
+| 84 | build-error-resolver (agent) | Fixes broken builds and compile errors. | Debugging Specialist | Full Stack | ECC | Shortlisted |
+| 85 | nextjs-on-cloudflare | Sets up, moves and deploys Next.js apps on Cloudflare Workers. | Full Stack Developer | Full Stack | cloudflare/skills | Candidate |
+| 86 | workers-development | Runs and debugs Cloudflare Workers apps on the developer's machine. | Full Stack Developer | Full Stack | cloudflare/skills | Candidate |
+| 87 | agents-sdk | Builds AI agents and AI features that run on Cloudflare. | AI Engineer | Full Stack | cloudflare/skills | Candidate |
+| 88 | react-native-patterns | React Native and Expo app patterns. | Mobile Developer | Mobile | ECC | Shortlisted |
+| 89 | dart-flutter-patterns | Flutter and Dart app patterns. | Mobile Developer | Mobile | ECC | Shortlisted |
+| 90 | swiftui-patterns | Native iOS apps with SwiftUI. | iOS Developer | Mobile | ECC | Shortlisted |
+| 91 | android-clean-architecture | Native Android app structure. | Android Developer | Mobile | ECC | Shortlisted |
+| 92 | expo-overview | Front door for Expo work: picks the right Expo skill for the task. | Mobile Developer | Mobile | expo/skills | Candidate |
+| 93 | expo-router | Screens and navigation in Expo apps. | Mobile Developer | Mobile | expo/skills | Candidate |
+| 94 | expo-native-ui | Makes Expo screens look and feel native on iPhone and Android. | Mobile UI Developer | Mobile | expo/skills | Candidate |
+| 95 | expo-data-fetching | Loading data in the app: API calls, caching, retries and offline. | Mobile Developer | Mobile | expo/skills | Candidate |
+| 96 | eas-app-stores | Builds the app and submits it to TestFlight, the App Store and Google Play. | Mobile Release Engineer | Mobile | expo/skills | Candidate |
+| 97 | eas-update | Pushes quick fixes to installed apps without a new store release. | Mobile Release Engineer | Mobile | expo/skills | Candidate |
+| 98 | test-driven-development | Writes the test first, then the code (red-green-refactor). | QA Engineer | QA & Testing | addyosmani/agent-skills | Shortlisted |
+| 99 | test-engineer (agent) | Plans test strategy, writes tests and checks coverage. | QA Engineer | QA & Testing | addyosmani/agent-skills | Shortlisted |
+| 100 | browser-testing-with-devtools | Tests the app in a real browser (DOM, console, network). | QA Engineer | QA & Testing | addyosmani/agent-skills | Shortlisted |
+| 101 | e2e-testing | End-to-end tests with Playwright. | QA Automation Engineer | QA & Testing | ECC | Shortlisted |
+| 102 | e2e-runner (agent) | Runs and fixes end-to-end test suites. | QA Automation Engineer | QA & Testing | ECC | Shortlisted |
+| 103 | bmad-qa-generate-e2e-tests | Adds end-to-end and API tests for features that already work. | QA Automation Engineer | QA & Testing | BMAD | Approved |
+| 104 | verify-and-stop | Proves work meets its acceptance criteria without adding scope. | QA Engineer | QA & Testing | caveman | Approved |
+| 105 | property-based-testing | Writes tests that throw thousands of random inputs at the code. | QA Engineer | QA & Testing | trailofbits/skills | Candidate |
+| 106 | accessibility-engineering | Audits and fixes WCAG 2.2 AA accessibility issues. | Accessibility Specialist | QA & Testing | addyosmani/agent-skills | Shortlisted |
+| 107 | accessibility-auditor (agent) | Reviews screens for screen-reader and keyboard use. | Accessibility Specialist | QA & Testing | addyosmani/agent-skills | Shortlisted |
+| 108 | performance-optimization | Finds and fixes slow front end, back end and database code. | Performance Engineer | QA & Testing | addyosmani/agent-skills | Shortlisted |
+| 109 | web-performance-auditor (agent) | Audits Core Web Vitals and page speed. | Performance Engineer | QA & Testing | addyosmani/agent-skills | Shortlisted |
+| 110 | web-perf | Audits page speed and Core Web Vitals. | Performance Engineer | QA & Testing | cloudflare/skills | Candidate |
+| 111 | security-and-hardening | Hardens code against common vulnerabilities (input, auth, data, integrations). | Application Security Engineer | Cybersecurity | addyosmani/agent-skills | Shortlisted |
+| 112 | security-auditor (agent) | Security reviewer focused on vulnerabilities and threat modeling. | Security Auditor | Cybersecurity | addyosmani/agent-skills | Shortlisted |
+| 113 | security-review | Security checklist for auth, user input, secrets, APIs and payments. | Application Security Engineer | Cybersecurity | ECC | Shortlisted |
+| 114 | mcp-dependency-review | Checks MCP configs for risky, unpinned packages before you approve them. | Supply-Chain Security Engineer | Cybersecurity | ECC | Shortlisted |
+| 115 | git-guardrails-claude-code | Blocks dangerous git commands like force-push and reset --hard (hook). | Security Officer | Cybersecurity | mattpocock/skills | Shortlisted |
+| 116 | security-audit | Six-phase security audit where every finding is independently re-checked. | Lead Security Auditor | Cybersecurity | cloudflare/security-audit-skill | Candidate |
+| 117 | vibe-security | Finds the security mistakes AI coding tools typically make (exposed keys, broken Supabase/Firebase access rules). | Application Security Engineer | Cybersecurity | raroque/vibe-security-skill | Candidate |
+| 118 | differential-review | Security review of a code change or PR. | Security Code Reviewer | Cybersecurity | trailofbits/skills | Candidate |
+| 119 | audit-context-building | Maps what each function assumes and guarantees before hunting bugs. | Security Auditor | Cybersecurity | trailofbits/skills | Candidate |
+| 120 | sharp-edges | Flags dangerous APIs, risky defaults and easy-to-misuse designs. | Security Architect | Cybersecurity | trailofbits/skills | Candidate |
+| 121 | supply-chain-risk-auditor | Checks every dependency for known advisories and supply-chain risk. | Supply-Chain Security Engineer | Cybersecurity | trailofbits/skills | Candidate |
+| 122 | semgrep | Runs a Semgrep security scan after showing you the plan. | Security Scanner Engineer | Cybersecurity | trailofbits/skills | Candidate |
+| 123 | codeql | Deep security scan that traces untrusted data through the code. | Security Scanner Engineer | Cybersecurity | trailofbits/skills | Candidate |
+| 124 | fp-check | Confirms or rejects a suspected bug so you don't chase false alarms. | Security Auditor | Cybersecurity | trailofbits/skills | Candidate |
+| 125 | variant-analysis | After one bug is found, hunts for the same bug elsewhere. | Security Auditor | Cybersecurity | trailofbits/skills | Candidate |
+| 126 | cvss-scoring | Scores how severe a vulnerability is (CVSS v4). | Security Auditor | Cybersecurity | trailofbits/skills | Candidate |
+| 127 | agentic-actions-auditor | Audits GitHub Actions that run AI agents for security holes. | DevSecOps Engineer | Cybersecurity | trailofbits/skills | Candidate |
+| 128 | SkillSpector | Scans agent skills for malicious or risky code before you install them. | Supply-Chain Security Engineer | Cybersecurity | NVIDIA/SkillSpector | Candidate |
+| 129 | claude-code-security-review | GitHub Action that reviews every pull request for vulnerabilities. | DevSecOps Engineer | Cybersecurity | anthropics/claude-code-security-review | Candidate |
+| 130 | turnstile-spin | Adds Cloudflare's bot check to forms, including the server-side check. | Application Security Engineer | Cybersecurity | cloudflare/skills | Candidate |
+| 131 | cloudflare-one | Puts admin tools behind Cloudflare Zero Trust login. | Network Security Engineer | Cybersecurity | cloudflare/skills | Candidate |
+| 132 | twoFactor | Adds two-step login (authenticator app, codes, backup codes). | Identity & Access Engineer | Cybersecurity | better-auth/skills | Candidate |
+| 133 | better-auth security | Login security: rate limits, CSRF, secure cookies and secrets. | Identity & Access Engineer | Cybersecurity | better-auth/skills | Candidate |
+| 134 | git-workflow-and-versioning | Clean branches, commits and merges. | DevOps Engineer | DevOps & Release | addyosmani/agent-skills | Shortlisted |
+| 135 | caveman-commit | Writes short, clear commit messages. | DevOps Engineer | DevOps & Release | caveman | Approved |
+| 136 | ci-cd-and-automation | Sets up build, test and deploy pipelines. | DevOps Engineer | DevOps & Release | addyosmani/agent-skills | Shortlisted |
+| 137 | docker-patterns | Docker and Compose setup, including container security. | DevOps Engineer | DevOps & Release | ECC | Shortlisted |
+| 138 | deployment-patterns | Deployment patterns and rollouts. | DevOps Engineer | DevOps & Release | ECC | Shortlisted |
+| 139 | observability-and-instrumentation | Adds logging, metrics, tracing and alerts so production issues are visible. | Site Reliability Engineer | DevOps & Release | addyosmani/agent-skills | Shortlisted |
+| 140 | shipping-and-launch | Pre-launch checklist and safe production release. | Release Manager | DevOps & Release | addyosmani/agent-skills | Shortlisted |
+| 141 | wrangler | Runs Cloudflare's deploy tool for local dev, previews and releases. | DevOps Engineer | DevOps & Release | cloudflare/skills | Candidate |
+| 142 | cloudflare-app-bootstrap | Wires a new Workers app's database, secrets and data until it runs. | DevOps Engineer | DevOps & Release | cloudflare/skills | Candidate |
+| 143 | workers-profiling | Finds slow or memory-hungry code in live Cloudflare Workers. | Site Reliability Engineer | DevOps & Release | cloudflare/skills | Candidate |
+| 144 | eas-workflows | Writes the build-and-release pipeline for the mobile app. | DevOps Engineer | DevOps & Release | expo/skills | Candidate |
+| 145 | caveman | Company-wide style: short answers, every technical fact kept. | All agents (company standard) | Engineering Leadership (Senior Dev) | caveman | Approved |
+| 146 | bmad-code-review | Several reviewers check a change in parallel, then findings are triaged. | Senior Dev / Lead Reviewer | Engineering Leadership (Senior Dev) | BMAD | Approved |
+| 147 | code-reviewer (agent) | Reviews changes for correctness, readability, architecture, security and performance. | Senior Dev / Lead Reviewer | Engineering Leadership (Senior Dev) | addyosmani/agent-skills | Shortlisted |
+| 148 | caveman-review | Short code review: one line per finding with location and fix. | Senior Dev / Lead Reviewer | Engineering Leadership (Senior Dev) | caveman | Approved |
+| 149 | bmad-review | Adversarial review of a draft or plan: edge cases, gaps, structure. | Senior Dev / Lead Reviewer | Engineering Leadership (Senior Dev) | BMAD | Approved |
+| 150 | bmad-walkthrough | Guides a human through reviewing a commit, PR or folder. | Senior Dev / Lead Reviewer | Engineering Leadership (Senior Dev) | BMAD | Approved |
+| 151 | bmad-project-context | Sets up and maintains the AGENTS.md rules every agent follows in a repo. | Tech Lead | Engineering Leadership (Senior Dev) | BMAD | Approved |
+| 152 | context-engineering | Keeps agent context and rules files lean so output stays sharp. | Tech Lead | Engineering Leadership (Senior Dev) | addyosmani/agent-skills | Shortlisted |
+| 153 | documentation-and-adrs | Records decisions (ADRs) and flags docs that drift from the code. | Technical Writer | Engineering Leadership (Senior Dev) | addyosmani/agent-skills | Shortlisted |
+| 154 | bmad-retrospective | Reviews a finished epic and writes lessons learned. | Engineering Manager | Engineering Leadership (Senior Dev) | BMAD | Approved |
+
+## Departments
+
+| Department | Skills | What the department does |
+|---|---|---|
+| Product & Business Analysis | 13 | Understands the problem and scopes the tool before anything is built. |
+| Research & Discovery | 10 | Studies existing code and other apps so the team knows what it's dealing with. |
+| Solution Architecture | 8 | Decides how the system fits together and where the risks are. |
+| UX/UI Design | 12 | Designs how the product looks, feels and moves. |
+| Front End | 9 | Builds what users see in the browser. |
+| Back End | 23 | Builds APIs, databases and payments. |
+| Full Stack | 12 | Builds features end to end and fixes bugs. |
+| Mobile | 10 | Builds iOS, Android and cross-platform apps. |
+| QA & Testing | 13 | Proves it works, is accessible and is fast. |
+| Cybersecurity | 23 | Finds and blocks security holes before and after release. |
+| DevOps & Release | 11 | Ships it safely and keeps it running. |
+| Engineering Leadership (Senior Dev) | 10 | Sets standards, reviews code and keeps every agent on the same rules. |
+
+Totals: 154 skills. Approved 43, Shortlisted 56, Candidate 55.
