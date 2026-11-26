@@ -8,7 +8,7 @@ This repository is a Claude Code plugin and its own private marketplace. Install
 
 | Path | What it is |
 |---|---|
-| `skills/` | 107 skills: 106 copied as plain files from their official repositories, plus `senior-dev-team` (the team rules) |
+| `skills/` | 137 skills: 136 copied as plain files from their official repositories, plus `senior-dev-team` (the team rules) |
 | `agents/` | 10 reviewer and auditor agents |
 | `.claude-plugin/` | Plugin and marketplace files that let Claude Code install this repo |
 | `CLAUDE.md` | The team rules, for when you work inside this repo itself |
@@ -33,20 +33,21 @@ Then restart Claude Code. Skills show up as `senior-dev-agents:<skill>` (for exa
 
 Because the repository is private, the computer needs GitHub access: be signed in with `gh auth login`, or have git credentials that can clone `aiahman/senior-dev-agents`. For background auto-updates, also set a `GITHUB_TOKEN` environment variable. To pull new versions by hand, run `/plugin marketplace update senior-dev-agents`.
 
-Some skills ship scripts that only run when an agent uses that skill, and Claude Code asks before running them (codeql, semgrep, supply-chain-risk-auditor, turnstile-spin, ui-ux-pro-max, design, eas-workflows). The codeql and semgrep skills need those scanners installed.
+Some skills ship scripts that only run when an agent uses that skill, and Claude Code asks before running them (codeql, semgrep, supply-chain-risk-auditor, turnstile-spin, ui-ux-pro-max, design, eas-workflows, the bmad-* skills, git-guardrails-claude-code). The codeql and semgrep skills need those scanners installed.
 
-## Not included yet (each needs its own OK)
+- **BMAD** skills need a one-time setup per project: ask for the `bmad` skill and it creates a `_bmad/` folder. Its scripts run with `uv`, and setup checks GitHub for BMAD updates.
+- **git-guardrails-claude-code** is only instructions until you use it; using it adds a hook to that project's `.claude/settings.json`.
+- **reverse-engineer-anything** is only instructions. Its full tool set needs the REA MCP server (`npx rea-agents setup`), which it asks for when needed.
 
-These change settings, add plugins or MCP servers, run installers, or need a sign-in, so they are added one at a time, per project:
+## Not included (they can't live in this repo as skill files)
 
-1. **BMAD Method** (analyst, PM, PO, architect, UX, dev, review personas): `npx bmad-method install` inside the project.
-2. **Understand-Anything** (understand-* skills): Claude Code plugin. Leave auto-update off.
-3. **git-guardrails-claude-code**: a hook in `.claude/settings.json` that blocks force-push and `reset --hard`.
-4. **Motion AI Kit** (motion, motion-reviewer): `npx motion-ai`, adds 2 hosted Motion MCP servers.
-5. **21st.dev CLI**: `npm i -g @21st-dev/cli`, then `21st login` (done by the owner personally), then its MCP config.
-6. **REA** (reverse-engineer-anything): `npx rea-agents setup`, adds an MCP server.
-7. **SkillSpector**: scanner to check new skills before adding them (Docker or pip).
-8. **claude-code-security-review**: GitHub Action for each app repository, needs an API key secret.
-9. **Better Auth skills** (create-auth, organization, two-factor, security...): [better-auth/skills](https://github.com/better-auth/skills) has no license file, so it isn't copied here. Install it from the source in the app project that uses Better Auth.
+Each of these is a tool, plugin or service, not a skill folder. Install them yourself on the computer or in the project that needs them:
+
+1. **Understand-Anything** (understand-* skills): a Claude Code plugin with its own hooks and built code, so the skill files don't work on their own. Install it as a plugin from [Egonex-AI/Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) and turn auto-update off.
+2. **Motion AI Kit** (motion, motion-reviewer): `npx motion-ai`, which adds 2 hosted Motion MCP servers.
+3. **21st.dev CLI**: `npm i -g @21st-dev/cli`, then `21st login` (the owner does this personally), then its MCP config.
+4. **SkillSpector**: a scanner for checking new skills before you add them (Docker or pip), from [NVIDIA/SkillSpector](https://github.com/NVIDIA/SkillSpector).
+5. **claude-code-security-review**: a GitHub Action added to each app repository. It needs an API key secret.
+6. **Better Auth skills** (create-auth, organization, two-factor, security...): [better-auth/skills](https://github.com/better-auth/skills) has no license file, so they aren't copied here. Install them from the source in the app project that uses Better Auth.
 
 Deliberately left out: graphify, Agent-Reach, last30days, gstack, GSD, headroom, claude-mem, and Stripe's Claude plugin (its hooks).

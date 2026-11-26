@@ -11,7 +11,7 @@ Every skill and agent under `skills/` and `agents/` was copied unchanged from th
 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | `0170613` | MIT | banner-design, brand, design, design-system, slides, ui-styling, ui-ux-pro-max |
 | [obra/superpowers](https://github.com/obra/superpowers) | `22f0b46` | MIT | brainstorming, writing-plans |
 | [juliusbrussee/caveman](https://github.com/juliusbrussee/caveman) | `e74a11c` | Apache-2.0 | caveman, caveman-commit, caveman-review, investigate-first, lean-build, migration, safe-refactor, surgical-patch, verify-and-stop |
-| [mattpocock/skills](https://github.com/mattpocock/skills) | `6f7f783` | MIT | codebase-design, improve-codebase-architecture, prototype |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | `6f7f783` | MIT | codebase-design, git-guardrails-claude-code, improve-codebase-architecture, prototype |
 | [expo/skills](https://github.com/expo/skills) | `6d0506a` | MIT | eas-app-stores, eas-update, eas-workflows, expo-data-fetching, expo-native-ui, expo-overview, expo-router |
 | [resend/resend-skills](https://github.com/resend/resend-skills) | `063246e` | MIT | email-best-practices, react-email, resend |
 | [honojs/skills](https://github.com/honojs/skills) | `e54ce51` | MIT | hono |
@@ -22,10 +22,13 @@ Every skill and agent under `skills/` and `agents/` was copied unchanged from th
 | [stripe/ai](https://github.com/stripe/ai) | `d4b19a9` | MIT | stripe-best-practices, stripe-implementation-planner |
 | [alpha-omega-security/threat-model](https://github.com/alpha-omega-security/threat-model) | `192fd60` | MIT | threat-model, threat-model-authoring, threat-model-backtest, threat-model-interview, threat-model-recon, threat-model-sidecar, threat-model-surface, threat-model-triage |
 | [raroque/vibe-security-skill](https://github.com/raroque/vibe-security-skill) | `850938f` | MIT | vibe-security |
+| [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | `e435a22` | MIT | bmad, bmad-advanced-elicitation, bmad-agent-analyst, bmad-agent-architect, bmad-agent-dev, bmad-agent-pm, bmad-agent-po, bmad-agent-ux-designer, bmad-architecture, bmad-brainstorming, bmad-build, bmad-build-auto, bmad-code-review, bmad-customize, bmad-deep-recon, bmad-facilitate, bmad-forge-idea, bmad-ingest, bmad-party-mode, bmad-project-context, bmad-qa-generate-e2e-tests, bmad-retrospective, bmad-review, bmad-shard-pro, bmad-ux, bmad-walkthrough, bmod-core-tools, bmod-method |
+| [morluto/rea](https://github.com/morluto/rea) | `192177f` | MIT | reverse-engineer-anything |
 
 ## Notes
 
 - **Trail of Bits skills (CC-BY-SA-4.0):** share-alike. If you change these skill files and share them, the changed files must stay under CC-BY-SA-4.0 with credit to Trail of Bits.
 - **Apache-2.0 sources** (cloudflare, caveman, inngest, neon): keep the license and any NOTICE text if you redistribute.
+- **BMAD trademark:** BMad, BMad Method and BMad Core are trademarks of BMad Code, LLC. The MIT license covers the code, not the names.
 - **Better Auth skills are not included.** [better-auth/skills](https://github.com/better-auth/skills) has no license file, so copying it into another repository is not clearly allowed. Install it straight from the source instead (see README).
 - Upstream test folders inside skills were removed; nothing else was changed, apart from these README/CLAUDE files.
