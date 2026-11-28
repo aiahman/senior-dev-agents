@@ -1,26 +1,50 @@
 # Senior Dev Agents
 
-An AI dev team for Claude Code, organized like an IT company: 12 departments, 16 leads and 64 specialist agents that help understand a tool, scope it, design it, build it, test it, secure it and ship it.
+**An AI software team for Claude Code, designed like a real IT company.**
 
-This repository is a Claude Code plugin and its own private marketplace. Install it once and every skill and agent is available in Claude Code on that computer.
+I built Senior Dev Agents to give myself a full dev team I can call on from one place: people who understand a tool, scope it, design it, build it, test it, secure it and ship it. It's organized into **12 departments, 16 team leads and 64 specialist agents**, backed by **137 skills and 10 reviewer agents**, and it installs into Claude Code as a single plugin.
 
-## What's inside
+![The full Senior Dev Agents org chart](docs/images/org-chart-full.png)
 
-| Path | What it is |
+**[Explore the interactive org chart →](https://claude.ai/artifact/QkF4Phd7LoPu1F9aGTgXJU)** Click any department or agent to see its skills. A copy is in [`docs/org-chart.html`](docs/org-chart.html).
+
+## Why I built it
+
+AI coding tools are powerful, but out of the box they behave like one generalist. I wanted a team with clear roles and an order of work, so that:
+
+- **Nothing gets built before it's understood and scoped.** Product, research and architecture come first.
+- **Security is a department, not an afterthought.** Every change gets an application-security pass and an audit before release.
+- **Every project starts from the same foundation.** A default tech stack, house rules and reviewers are shared across everything I build: websites, a SaaS tool, and mobile, desktop and web apps.
+
+## How the team works
+
+Work moves through the departments in build order. Each department has named leads, and each lead runs a group of specialist agents with their own skills.
+
+| Stage | Departments |
 |---|---|
-| `skills/` | 137 skills: 136 copied as plain files from their official repositories, plus `senior-dev-team` (the team rules) |
-| `agents/` | 10 reviewer and auditor agents |
-| `.claude-plugin/` | Plugin and marketplace files that let Claude Code install this repo |
-| `CLAUDE.md` | The team rules, for when you work inside this repo itself |
-| `docs/team-hierarchy.md` | The org chart as a text tree |
-| `docs/org-chart.html` | The interactive org chart (open in a browser) |
-| `docs/team-skills-table.md` / `.csv` | Every skill, with a one-line description, agent role and department |
-| `docs/default-tech-stack.md` | The default tech stack, its options, and which skills cover each layer |
-| `THIRD_PARTY_NOTICES.md`, `licenses/` | Where every skill came from, at which commit, under which license |
+| Understand and scope | Product & Business Analysis, Research & Discovery |
+| Design | Solution Architecture, UX/UI Design |
+| Build | Front End, Back End, Full Stack, Mobile |
+| Prove and protect | QA & Testing, Cybersecurity |
+| Ship | DevOps & Release |
+| Oversee | Engineering Leadership (Senior Dev) |
 
-There are no hooks, plugins, MCP servers, settings files or telemetry in this repository.
+<table>
+<tr>
+<td width="50%"><img src="docs/images/department-cybersecurity.png" alt="Cybersecurity department view"><br><sub>Each department has its own view. Cybersecurity has two leads and ten specialists.</sub></td>
+<td width="50%"><img src="docs/images/agent-skills-panel.png" alt="Agent skills panel"><br><sub>Clicking an agent shows its skills and what each one does.</sub></td>
+</tr>
+</table>
 
-## How to use it
+## What I designed
+
+- **The org structure:** 12 departments, 16 leads and 64 roles, each mapped to the skills that agent needs. See [`docs/team-hierarchy.md`](docs/team-hierarchy.md) and [`docs/team-skills-table.md`](docs/team-skills-table.md).
+- **The default tech stack** every tool starts from: TypeScript; Cloudflare for hosting, edge and security; Next.js; Neon Postgres with Prisma; Better Auth; Stripe; Resend; Expo; Vitest and Playwright; GitHub Actions; and Sentry. It's matched to the skills the team actually has. See [`docs/default-tech-stack.md`](docs/default-tech-stack.md).
+- **The house rules** in [`CLAUDE.md`](CLAUDE.md) and the `senior-dev-team` skill: scope before building, a security pass before release, small, safe changes, and nothing installed without approval.
+- **The selection and safety review:** I evaluated dozens of open-source agent-skill repositories, kept the strongest and removed duplicates. I rejected anything that scraped social sites, reused browser logins, added tracking or ran hidden hooks. The team ships as plain skill files, with no hooks, MCP servers, settings changes or telemetry.
+- **The packaging:** a Claude Code plugin with its own private marketplace, so one command installs the whole team on any machine.
+
+## Install
 
 In Claude Code, run:
 
@@ -29,25 +53,22 @@ In Claude Code, run:
 /plugin install senior-dev-agents@senior-dev-agents
 ```
 
-Then restart Claude Code. Skills show up as `senior-dev-agents:<skill>` (for example `senior-dev-agents:security-review`), and the agents appear in `/agents`.
+Restart Claude Code. Skills appear as `senior-dev-agents:<skill>` (for example `senior-dev-agents:security-review`), and the agents appear in `/agents`. To update, run `/plugin marketplace update senior-dev-agents`.
 
-Because the repository is private, the computer needs GitHub access: be signed in with `gh auth login`, or have git credentials that can clone `aiahman/senior-dev-agents`. For background auto-updates, also set a `GITHUB_TOKEN` environment variable. To pull new versions by hand, run `/plugin marketplace update senior-dev-agents`.
+While the repository is private, the computer needs GitHub access (`gh auth login`).
 
-Some skills ship scripts that only run when an agent uses that skill, and Claude Code asks before running them (codeql, semgrep, supply-chain-risk-auditor, turnstile-spin, ui-ux-pro-max, design, eas-workflows, the bmad-* skills, git-guardrails-claude-code). The codeql and semgrep skills need those scanners installed.
+A few skills include scripts that run only when an agent uses that skill, and Claude Code asks before running them. The codeql and semgrep skills need those scanners installed. BMAD needs a one-time setup per project: ask for the `bmad` skill and it creates a `_bmad/` folder.
 
-- **BMAD** skills need a one-time setup per project: ask for the `bmad` skill and it creates a `_bmad/` folder. Its scripts run with `uv`, and setup checks GitHub for BMAD updates.
-- **git-guardrails-claude-code** is only instructions until you use it; using it adds a hook to that project's `.claude/settings.json`.
-- **reverse-engineer-anything** is only instructions. Its full tool set needs the REA MCP server (`npx rea-agents setup`), which it asks for when needed.
+## Repository layout
 
-## Not included (they can't live in this repo as skill files)
+| Path | What it is |
+|---|---|
+| `skills/` | 137 skills, including `senior-dev-team` (the team rules) |
+| `agents/` | 10 reviewer and auditor agents |
+| `.claude-plugin/` | Plugin and marketplace files |
+| `docs/` | Org chart, skills table, tech stack and screenshots |
+| `THIRD_PARTY_NOTICES.md`, `licenses/` | Credits and licenses for every skill source |
 
-Each of these is a tool, plugin or service, not a skill folder. Install them yourself on the computer or in the project that needs them:
+## Credits
 
-1. **Understand-Anything** (understand-* skills): a Claude Code plugin with its own hooks and built code, so the skill files don't work on their own. Install it as a plugin from [Egonex-AI/Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) and turn auto-update off.
-2. **Motion AI Kit** (motion, motion-reviewer): `npx motion-ai`, which adds 2 hosted Motion MCP servers.
-3. **21st.dev CLI**: `npm i -g @21st-dev/cli`, then `21st login` (the owner does this personally), then its MCP config.
-4. **SkillSpector**: a scanner for checking new skills before you add them (Docker or pip), from [NVIDIA/SkillSpector](https://github.com/NVIDIA/SkillSpector).
-5. **claude-code-security-review**: a GitHub Action added to each app repository. It needs an API key secret.
-6. **Better Auth skills** (create-auth, organization, two-factor, security...): [better-auth/skills](https://github.com/better-auth/skills) has no license file, so they aren't copied here. Install them from the source in the app project that uses Better Auth.
-
-Deliberately left out: graphify, Agent-Reach, last30days, gstack, GSD, headroom, claude-mem, and Stripe's Claude plugin (its hooks).
+The individual skills come from open-source projects, used under their licenses and credited in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). They include addyosmani/agent-skills, Trail of Bits, Cloudflare, BMAD Method, Expo, Stripe, Prisma, Neon, Resend, Hono, Inngest, obra/superpowers, mattpocock/skills, affaan-m/ECC, caveman, ui-ux-pro-max, REA and others. The team design, stack, rules, curation and packaging are my own work.
